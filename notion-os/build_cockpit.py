@@ -6,16 +6,11 @@ calls cockpit_builder.render_cockpit on the Operations Dashboard section page.
 """
 
 import json
-import sys
 from pathlib import Path
 
 import yaml
 
-try:
-    from notion_os_toolkit import auth, client as notion_client, cockpit_builder
-except ImportError:
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "notion-os-toolkit"))
-    from src import auth, client as notion_client, cockpit_builder  # type: ignore
+from notion_os_toolkit import auth, client as notion_client, cockpit_builder
 
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parent

@@ -9,14 +9,9 @@ For each project where Is Active = checked:
 
 import datetime as dt
 import json
-import sys
 from pathlib import Path
 
-try:
-    from notion_os_toolkit import auth, client as notion_client
-except ImportError:
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "notion-os-toolkit"))
-    from src import auth, client as notion_client  # type: ignore
+from notion_os_toolkit import auth, client as notion_client
 
 ROOT = Path(__file__).resolve().parent
 IDS = ROOT / "ids.json"

@@ -2,16 +2,11 @@
 """Regenerate SCHEMA-REFERENCE.md + schema-reference.json from live workspace."""
 
 import json
-import sys
 from pathlib import Path
 
 import yaml
 
-try:
-    from notion_os_toolkit import auth, client as notion_client, schema_dump
-except ImportError:
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "notion-os-toolkit"))
-    from src import auth, client as notion_client, schema_dump  # type: ignore
+from notion_os_toolkit import auth, client as notion_client, schema_dump
 
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parent
