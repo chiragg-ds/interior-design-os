@@ -1,0 +1,53 @@
+# Checkbox/date helper formulas added to DBs after relations are wired.
+# These power the Operations Cockpit single-checkbox filters.
+#
+# CRITICAL: Notion formulas cannot reference another formula property in date
+# comparisons. Inline the underlying date column instead. Each formula here
+# avoids cross-formula-ref where it would matter.
+
+formulas:
+  Deliverables:
+    Feedback Due Date: 'dateAdd(prop("Issued Date"), 4, "days")'
+    Needs Client Approval: 'prop("Status") == "Client Review" and prop("Requires Client Approval")'
+    SLA Breach: 'not empty(prop("Issued Date")) and dateAdd(prop("Issued Date"), 4, "days") < now() and prop("Status") != "Approved" and prop("Status") != "Issued"'
+
+  Finance:
+    Invoice Due Date: 'dateAdd(prop("Date"), {{ invoice_due_days }}, "days")'
+    Is Overdue: 'prop("Record Type") == "Invoice Issued" and prop("Status") != "Received" and prop("Status") != "Written Off" and not empty(prop("Date")) and dateAdd(prop("Date"), {{ invoice_due_days }}, "days") < now()'
+    Is Revenue MTD: 'prop("Record Type") == "Payment Received" and not empty(prop("Date")) and formatDate(prop("Date"), "YYYY-MM") == formatDate(now(), "YYYY-MM")'
+
+  Projects:
+    Is Active: 'prop("Project Stage") != "Handover" and prop("Client Sign-off") == false'
+
+  Tasks:
+    Done Flag: 'if(prop("Status") == "Done", 1, 0)'
+    Is Open: 'prop("Is Template") == false and prop("Status") != "Done"'
+    Due This Week: 'prop("Is Template") == false and prop("Status") != "Done" and not empty(prop("Deadline")) and dateBetween(prop("Deadline"), now(), "days") >= 0 and dateBetween(prop("Deadline"), now(), "days") <= 7'
+    Ready: 'if(prop("Dep Total") == 0 or prop("Dep Done") == prop("Dep Total"), "✅ Ready", "🔒 Blocked — " + format(prop("Dep Done")) + "/" + format(prop("Dep Total")))'
+
+  Relevant Checklist:
+    Status Flag: 'if(prop("Status") == "Done", 1, 0)'
+
+  Leads:
+    Needs Follow-up: 'not empty(prop("Next Action Date")) and prop("Next Action Date") <= now() and prop("Lead Stage") != "Won" and prop("Lead Stage") != "Lost"'
+
+  BOQ:
+    Amount (Calculated): 'prop("Quantity") * prop("Unit Rate")'
+
+# Rollups (added separately because they reference other DB props)
+rollups:
+  Projects:
+    Checklist Done:    {via: Checklists,    target: Status Flag,    function: sum}
+    Checklist Total:   {via: Checklists,    target: Item Name,      function: count_values}
+    Task Done:         {via: Tasks,         target: Done Flag,      function: sum}
+    Task Total:        {via: Tasks,         target: Task Action,    function: count_values}
+    Handover Completion %: {via: Handover Items, target: Client Sign-off, function: percent_checked}
+
+  Tasks:
+    Dep Done:  {via: Dependencies, target: Done Flag,   function: sum}
+    Dep Total: {via: Dependencies, target: Task Action, function: count_values}
+
+# Project completion % depends on Checklist rollups → added LAST
+post_rollup_formulas:
+  Projects:
+    Completion %: 'if(prop("Checklist Total") == 0, 0, round(prop("Checklist Done") / prop("Checklist Total") * 100))'

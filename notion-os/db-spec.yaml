@@ -1,0 +1,325 @@
+# Interior Designer OS — Notion workspace specification.
+#
+# Defines the 9 sections and 19 databases that make up the operating system.
+# Consumed by notion-os-toolkit's provisioner — runs idempotent against a root page.
+#
+# Property syntax follows Notion API 2022-06-28:
+#   title:        {title: {}}
+#   text:         {rich_text: {}}
+#   number:       {number: {format: number|percent|...}}
+#   select:       {select: {options: [...]}}
+#   multi_select: {multi_select: {options: [...]}}
+#   date:         {date: {}}
+#   checkbox:     {checkbox: {}}
+#   url|email|phone_number: {url: {}} etc
+#   people:       {people: {}}
+#   relation:     {relation: {database_id: "<id-of-other-db>", single_property: {}}}
+#                 — IDs filled in by provisioner after both DBs exist (second pass)
+#   formula:      {formula: {expression: "prop(\"X\") == ..."}}
+#                 — added by add_helper_formulas.py after relations are wired
+#
+# root_page_id MUST be provided at runtime via NOTION_ROOT_PAGE_ID env var.
+# This file is config; the script reads {{ env.NOTION_ROOT_PAGE_ID }}.
+
+root_page_id: "${NOTION_ROOT_PAGE_ID}"
+
+sections:
+  - title: CRM
+    icon: 👥
+    databases:
+      - name: Team Members
+        properties:
+          Member Name:       {title: {}}
+          Role:              {select: {options: [{name: Principal Designer}, {name: Project Manager}, {name: Designer}, {name: Site Supervisor}, {name: Operations}, {name: Finance}]}}
+          Permission Level:  {select: {options: [{name: Admin}, {name: Manager}, {name: Viewer}, {name: Contributor}]}}
+          Work Email:        {email: {}}
+          Work Phone:        {phone_number: {}}
+          Active:            {checkbox: {}}
+
+      - name: Leads
+        properties:
+          Lead Name:           {title: {}}
+          Lead Email:          {email: {}}
+          Lead Phone:          {phone_number: {}}
+          Company:             {rich_text: {}}
+          Lead Source:         {select: {options: [{name: Referral}, {name: Website}, {name: Instagram}, {name: Repeat Client}, {name: Partner}]}}
+          Lead Stage:          {select: {options: [{name: Initial Contact}, {name: Meeting Booked}, {name: Proposal Sent}, {name: Won}, {name: Lost}]}}
+          Meeting Booked Date: {date: {}}
+          Proposal Sent Date:  {date: {}}
+          Next Action Date:    {date: {}}
+          Lead Owner:          {people: {}}
+          Lead Notes:          {rich_text: {}}
+          AI Summary:          {rich_text: {}}
+          Summary:             {rich_text: {}}
+
+      - name: Clients
+        properties:
+          Client Name:          {title: {}}
+          Primary Contact Name: {rich_text: {}}
+          Primary Email:        {email: {}}
+          Primary Phone:        {phone_number: {}}
+          Company Name:         {rich_text: {}}
+          Project Site Address: {rich_text: {}}
+          Lead Source:          {select: {options: [{name: Referral}, {name: Website}, {name: Instagram}, {name: Repeat Client}, {name: Partner}]}}
+          Onboarding Status:    {select: {options: [{name: Pending Docs}, {name: In Progress}, {name: Complete}]}}
+          Permissions Profile:  {select: {options: [{name: Standard}, {name: Management Restricted}]}}
+
+      - name: Activities
+        properties:
+          Activity Title:   {title: {}}
+          Activity Type:    {select: {options: [{name: Call}, {name: Meeting}, {name: Email}, {name: Site Visit}, {name: Approval}, {name: Payment}, {name: Delivery}, {name: Internal Review}, {name: Action Item}]}}
+          Activity Date:    {date: {}}
+          Outcome:          {rich_text: {}}
+          Action Required:  {rich_text: {}}
+          Next Action:      {rich_text: {}}
+          Next Action Date: {date: {}}
+          Owner:            {people: {}}
+          Reference Link:   {url: {}}
+
+      - name: Meeting Notes
+        properties:
+          Meeting Title:     {title: {}}
+          Date:              {date: {}}
+          Meeting Type:      {select: {options: [{name: Client Meeting}, {name: Internal Review}, {name: Site Visit}, {name: Vendor Meeting}, {name: Design Presentation}]}}
+          Location:          {rich_text: {}}
+          Attendees:         {rich_text: {}}
+          Agenda:            {rich_text: {}}
+          Notes:             {rich_text: {}}
+          AI Summary:        {rich_text: {}}
+          AI Action Items:   {rich_text: {}}
+          Has Recording:     {checkbox: {}}
+          Next Meeting Date: {date: {}}
+
+      - name: Client Questionnaire Responses
+        properties:
+          Client Name:     {title: {}}
+          Email:           {email: {}}
+          Phone:           {phone_number: {}}
+          Submission Date: {date: {}}
+          Project Type:    {select: {options: [{name: Interior Fit-Out}, {name: Renovation / Remodelling}, {name: Refurbishment / Facelift}]}}
+          Property Type:   {select: {options: [{name: Stand-alone Home}, {name: Apartment / Condo}]}}
+          Scope of Work:   {select: {options: [{name: Only Design}, {name: Only Execution}, {name: Both}]}}
+          Budget Range:    {select: {options: [{name: "Less than Rs.50L"}, {name: "Rs.50L - Rs.1 Cr"}, {name: "Rs.1 Cr - Rs.2 Cr"}, {name: "Rs.2 Cr+"}, {name: Flexible}]}}
+          Design Style:    {multi_select: {options: [{name: Contemporary}, {name: Minimalist}, {name: Modern Luxe}, {name: Scandinavian}, {name: "Traditional / Classical"}, {name: "Bohemian / Eclectic"}, {name: Art Deco}, {name: Japandi}, {name: Industrial}, {name: Transitional}, {name: Other}]}}
+          Top 3 Goals:     {rich_text: {}}
+          Additional Notes: {rich_text: {}}
+
+  - title: Projects
+    icon: 🏗️
+    databases:
+      - name: Projects
+        properties:
+          Project Name:           {title: {}}
+          Project Stage:          {select: {options: [{name: Client Consultation and Pre-Planning}, {name: Design and Approvals}, {name: Flooring and Wet Areas}, {name: Ceiling and Wall Finishes}, {name: Carpentry and Fixed Elements}, {name: Furniture and Soft Furnishings}, {name: Final Touches and Styling}, {name: Handover}]}}
+          Work Scope:             {select: {options: [{name: Full Home Interior}, {name: Modular Kitchen}, {name: Bathroom Renovation}, {name: "Carpentry & FF&E"}]}}
+          Type of Property:       {select: {options: [{name: Residential}, {name: Commercial}, {name: Hospitality}, {name: Other}]}}
+          Start Date:             {date: {}}
+          Target Handover Date:   {date: {}}
+          Carpet Area (sq ft):    {number: {format: number}}
+          Budget Total:           {number: {format: number}}
+          Iterations Used:        {number: {format: number}}
+          Max Design Iterations:  {number: {format: number}}
+          Estimation Status:      {select: {options: [{name: To Be Estimated}, {name: Quote / Proposal Sent}, {name: Pending Measurements}, {name: BOQ Drafting}, {name: BOQ Active / In Progress}, {name: Closed / Finalized}]}}
+          Approval Status:        {select: {options: [{name: Pending Internal}, {name: Pending Client}, {name: Approved}]}}
+          Timeline Status:        {select: {options: [{name: On Track}, {name: At Risk}, {name: Delayed}]}}
+          Tasks Status:           {select: {options: [{name: Not Seeded}, {name: Seeded}, {name: Archived}]}}
+          Checklist Status:       {select: {options: [{name: Not Seeded}, {name: Seeded}, {name: Archived}]}}
+          Scope of Work Summary:  {rich_text: {}}
+          Client Sign-off:        {checkbox: {}}
+          Project Manager:        {people: {}}
+
+      - name: Site Log
+        properties:
+          Log Title:          {title: {}}
+          Date:               {date: {}}
+          Weather:            {select: {options: [{name: Clear}, {name: Cloudy}, {name: Rain}, {name: "N/A"}]}}
+          Site Summary:       {rich_text: {}}
+          Update Description: {rich_text: {}}
+          Issues Flagged:     {rich_text: {}}
+          Photos Link:        {url: {}}
+          Logged By:          {people: {}}
+
+      - name: Materials
+        properties:
+          Item Name:              {title: {}}
+          Category:               {select: {options: [{name: Tiles}, {name: Paint}, {name: Furniture}, {name: Lighting}, {name: Hardware}, {name: Plumbing Fixtures}, {name: Electrical}, {name: Fabric}, {name: False Ceiling}, {name: Flooring}, {name: Sanitary}, {name: Kitchen}, {name: Doors and Windows}, {name: Other}]}}
+          Brand:                  {rich_text: {}}
+          Quantity:               {number: {format: number}}
+          Unit:                   {select: {options: [{name: Sqft}, {name: Nos}, {name: RFT}, {name: Set}, {name: Box}, {name: Kg}, {name: Litre}]}}
+          Unit Cost:              {number: {format: number}}
+          Total Cost:             {number: {format: number}}
+          Status:                 {multi_select: {options: [{name: Shortlisted}, {name: Approved by Client}, {name: Ordered}, {name: Expected Delivery}, {name: Delivered}, {name: Installed}]}}
+          Ordered Date:           {date: {}}
+          Expected Delivery Date: {date: {}}
+          Delivered Date:         {date: {}}
+          Installed Date:         {date: {}}
+          Remarks:                {rich_text: {}}
+
+      - name: Tasks
+        properties:
+          Task Action:        {title: {}}
+          Task Category:      {select: {options: [{name: Design Iteration}, {name: Client Approval}, {name: Civil Works}, {name: MEP}, {name: Carpentry}, {name: Procurement}, {name: Snagging}, {name: Handover}]}}
+          Project Stage:      {select: {options: [{name: Client Consultation and Pre-Planning}, {name: Design and Approvals}, {name: Flooring and Wet Areas}, {name: Ceiling and Wall Finishes}, {name: Carpentry and Fixed Elements}, {name: Furniture and Soft Furnishings}, {name: Final Touches and Styling}, {name: Handover}]}}
+          Status:             {status: {options: [{name: Blocked}, {name: To Do}, {name: In Progress}, {name: QA Review}, {name: Done}]}}
+          Deadline:           {date: {}}
+          Assignee:           {people: {}}
+          Applicable Scopes:  {multi_select: {options: [{name: Full Home Interior}, {name: Modular Kitchen}, {name: Bathroom Renovation}, {name: "Carpentry & FF&E"}, {name: all}]}}
+          Is Template:        {checkbox: {}}
+          Template Group:     {rich_text: {}}
+          Depends On Groups:  {rich_text: {}}
+          Notes:              {rich_text: {}}
+
+      - name: Weekly Status Log
+        properties:
+          Entry:                {title: {}}
+          Week Of:              {date: {}}
+          Stage Snapshot:       {select: {options: [{name: Client Consultation and Pre-Planning}, {name: Design and Approvals}, {name: Flooring and Wet Areas}, {name: Ceiling and Wall Finishes}, {name: Carpentry and Fixed Elements}, {name: Furniture and Soft Furnishings}, {name: Final Touches and Styling}, {name: Handover}]}}
+          Completion %:         {number: {format: percent}}
+          Tasks Done This Week: {number: {format: number}}
+          Tasks In Progress:    {number: {format: number}}
+          Tasks Blocked:        {number: {format: number}}
+          Timeline Health:      {select: {options: [{name: On Track}, {name: At Risk}, {name: Delayed}]}}
+          Blockers:             {rich_text: {}}
+          Wins:                 {rich_text: {}}
+          Notes:                {rich_text: {}}
+          Posted By:            {select: {options: [{name: AI Agent}, {name: Manual}]}}
+
+  - title: Contracts
+    icon: 📑
+    databases:
+      - name: Contracts
+        properties:
+          Contract Name:              {title: {}}
+          Contract Date:              {date: {}}
+          Contract Version:           {rich_text: {}}
+          Contract Status:            {multi_select: {options: [{name: Draft}, {name: Sent}, {name: Signed}, {name: Active}, {name: Completed}, {name: Terminated}]}}
+          Fee Total:                  {rich_text: {}}
+          Stage 1 Fee (%):            {number: {format: number}}
+          Stage 2 Fee (%):            {number: {format: number}}
+          Stage 3 Fee (%):            {number: {format: number}}
+          Stage 4 Fee (%):            {number: {format: number}}
+          GST Rate (%):               {number: {format: number}}
+          Client Feedback SLA (hours): {rich_text: {}}
+          Invoice Due Days:           {select: {options: [{name: "7"}, {name: "14"}, {name: "30"}]}}
+
+      - name: BOQ
+        properties:
+          Item Name:        {title: {}}
+          Item Description: {rich_text: {}}
+          Category:         {select: {options: [{name: Civil}, {name: Electrical}, {name: Plumbing}, {name: Carpentry}, {name: Flooring}, {name: Tiling}, {name: False Ceiling}, {name: Paint}, {name: Furniture}, {name: Lighting}, {name: HVAC}, {name: Hardware}, {name: Other}]}}
+          Project Stage:    {select: {options: [{name: Client Consultation and Pre-Planning}, {name: Design and Approvals}, {name: Flooring and Wet Areas}, {name: Ceiling and Wall Finishes}, {name: Carpentry and Fixed Elements}, {name: Furniture and Soft Furnishings}, {name: Final Touches and Styling}, {name: Handover}]}}
+          Quantity:         {number: {format: number}}
+          Unit:             {select: {options: [{name: Sqft}, {name: Nos}, {name: RFT}, {name: Set}, {name: LS}, {name: Kg}]}}
+          Unit Rate:        {number: {format: number}}
+          Total Amount:     {number: {format: number}}
+          Status:           {select: {options: [{name: Quoted}, {name: Approved}, {name: Ordered}, {name: Delivered}, {name: Installed}]}}
+          Notes:            {rich_text: {}}
+
+  - title: Deliverables
+    icon: 🎨
+    databases:
+      - name: Deliverables
+        properties:
+          Deliverable Name:         {title: {}}
+          Deliverable Type:         {select: {options: [{name: Drawing}, {name: Presentation}, {name: BOQ}, {name: Render}, {name: Walkthrough}, {name: As-Built Plan}, {name: Warranty Pack}, {name: Handover Report}]}}
+          Drawing Category:         {select: {options: [{name: General Layout}, {name: Civil}, {name: Electrical}, {name: Plumbing and Sanitary}, {name: Flooring and Tiling}, {name: Kitchen}, {name: False Ceiling}, {name: Furniture and Wardrobe}, {name: Custom Furniture}, {name: Bathroom}, {name: Doors and Windows}, {name: Paint and Finish}, {name: HVAC and Automation}, {name: Coordination}]}}
+          Version:                  {rich_text: {}}
+          Status:                   {select: {options: [{name: Not Started}, {name: In Progress}, {name: Internal Review}, {name: Client Review}, {name: Approved}, {name: Issued}]}}
+          Issued Date:              {date: {}}
+          Due Date:                 {date: {}}
+          Client Approval Date:     {date: {}}
+          Requires Client Approval: {checkbox: {}}
+          File Link:                {url: {}}
+          Change Log:               {rich_text: {}}
+          Review Flag:              {rich_text: {}}
+          Owner:                    {people: {}}
+
+  - title: Finance
+    icon: 💰
+    databases:
+      - name: Finance
+        properties:
+          Record Title:    {title: {}}
+          Record Type:     {select: {options: [{name: Invoice Issued}, {name: Payment Received}, {name: Project Expense}, {name: Operating Expense}, {name: Refund}]}}
+          Date:            {date: {}}
+          Amount:          {number: {format: number}}
+          GST Amount:      {number: {format: number}}
+          Net Amount:      {number: {format: number}}
+          Status:          {select: {options: [{name: Pending}, {name: Received}, {name: Overdue}, {name: Written Off}]}}
+          Stage Reference: {select: {options: [{name: "Stage 1 (25%)"}, {name: "Stage 2 (40%)"}, {name: "Stage 3 (25%)"}, {name: "Stage 4 (10%)"}, {name: Operating}, {name: Ad Hoc}]}}
+          Payment Method:  {select: {options: [{name: Bank Transfer}, {name: Cheque}, {name: UPI}, {name: Cash}, {name: Other}]}}
+          Notes:           {rich_text: {}}
+
+  - title: Operations
+    icon: ⚙️
+    databases:
+      - name: Vendors
+        properties:
+          Vendor Name:  {title: {}}
+          Brand:        {rich_text: {}}
+          Category:     {select: {options: [{name: Tiles}, {name: Paint}, {name: Furniture}, {name: Lighting}, {name: Hardware}, {name: Plumbing Fixtures}, {name: Electrical}, {name: Fabric and Upholstery}, {name: False Ceiling}, {name: Flooring}, {name: Sanitary}, {name: HVAC}, {name: Kitchen}, {name: Other}]}}
+          Contact Name: {rich_text: {}}
+          Email:        {email: {}}
+          Phone:        {phone_number: {}}
+          City:         {rich_text: {}}
+          Rating:       {select: {options: [{name: Poor}, {name: Average}, {name: Good}, {name: Very Good}, {name: Excellent}]}}
+          Active:       {checkbox: {}}
+          Notes:        {rich_text: {}}
+
+      - name: Contractors
+        properties:
+          Contractor Name: {title: {}}
+          Trade:           {select: {options: [{name: Civil}, {name: Electrical}, {name: Plumbing}, {name: Carpentry}, {name: Flooring}, {name: Tiling}, {name: False Ceiling}, {name: Paint}, {name: HVAC}, {name: Glass and Aluminium}, {name: General Labour}, {name: Other}]}}
+          Daily Rate:      {number: {format: number}}
+          Contact Email:   {email: {}}
+          Contact Phone:   {phone_number: {}}
+          Status:          {select: {options: [{name: Active}, {name: On Leave}, {name: Inactive}, {name: Blacklisted}]}}
+          Notes:           {rich_text: {}}
+
+      - name: Relevant Checklist
+        properties:
+          Item Name:         {title: {}}
+          Category:          {select: {options: [{name: Kitchen}, {name: Civil Works}, {name: Plumbing}, {name: Electrical}, {name: Waterproofing}, {name: Carpentry}, {name: Flooring}, {name: Ceiling & Walls}, {name: Soft Furnishings}, {name: Scope Decision}]}}
+          Section:           {select: {options: [{name: Project Basics}, {name: Workflow & Layout}, {name: Clearances}, {name: Appliance Planning}, {name: Prep & Landing}, {name: Storage Planning}, {name: Hardware & Accessories}, {name: Electrical Planning}, {name: Plumbing Planning}, {name: Ventilation & AC}, {name: Materials & Carpentry}, {name: Final Execution}, {name: Civil Works}, {name: Plumbing}, {name: Electrical}, {name: Waterproofing}, {name: Entrance/Foyer/Living/Dining}, {name: Kitchen Scope}, {name: Bedrooms 1+2+3}, {name: Bathrooms 1+2+3}, {name: Balcony}, {name: Help Room / Store Room}]}}
+          Project Stage:     {select: {options: [{name: Client Consultation and Pre-Planning}, {name: Design and Approvals}, {name: Flooring and Wet Areas}, {name: Ceiling and Wall Finishes}, {name: Carpentry and Fixed Elements}, {name: Furniture and Soft Furnishings}, {name: Final Touches and Styling}, {name: Handover}]}}
+          Status:            {select: {options: [{name: Not Started}, {name: In Progress}, {name: Done}, {name: "N/A"}]}}
+          Priority:          {select: {options: [{name: High}, {name: Medium}, {name: Low}]}}
+          Source:            {select: {options: [{name: Kitchen Checklist}, {name: Interior Checklist}, {name: Scope Sheet}]}}
+          Applicable Scopes: {multi_select: {options: [{name: Full Home Interior}, {name: Modular Kitchen}, {name: Bathroom Renovation}, {name: "Carpentry & FF&E"}]}}
+          Is Template:       {checkbox: {}}
+          Notes:             {rich_text: {}}
+
+  - title: Handover
+    icon: ✅
+    databases:
+      - name: Handover Items
+        properties:
+          Item Title:         {title: {}}
+          Item Number:        {number: {format: number}}
+          Checklist Section:  {select: {options: [{name: Design Compliance}, {name: Civil and Finishes}, {name: Electrical and Automation}, {name: Plumbing and Wet Areas}, {name: Carpentry and Furniture}, {name: Safety and Security}, {name: Documentation and Sign-off}]}}
+          Status:             {select: {options: [{name: Not Started}, {name: In Progress}, {name: Blocked}, {name: Verified}, {name: Not Applicable}]}}
+          Owner:              {people: {}}
+          Verification Date:  {date: {}}
+          Client Sign-off:    {checkbox: {}}
+          Evidence Link:      {url: {}}
+          Notes:              {rich_text: {}}
+
+  - title: Templates
+    icon: 📚
+    databases:
+      - name: Templates
+        properties:
+          Template Name:  {title: {}}
+          Template Type:  {select: {options: [{name: Contract}, {name: Questionnaire}, {name: Intake Checklist}, {name: Roadmap}, {name: Drawing Register}, {name: Handover Checklist}, {name: Presentation}, {name: Profile}, {name: Stationery}]}}
+          Status:         {select: {options: [{name: Draft}, {name: Active}, {name: Archived}]}}
+          Version:        {rich_text: {}}
+          Last Reviewed:  {date: {}}
+          File Link:      {url: {}}
+          Source Folder:  {rich_text: {}}
+
+  - title: Operations Dashboard
+    icon: 🧭
+    databases: []  # Cockpit page rendered separately via cockpit_builder
+
+# Relations between DBs are added in a second pass after all DBs exist.
+# See post_provision_relations.yaml.

@@ -1,0 +1,66 @@
+# Operations Cockpit layout. Consumed by cockpit_builder.render_cockpit.
+# All filters reference helper formulas defined in helper_formulas.yaml.
+
+brand_name: "{{ brand.name }}"
+tagline: "Decision queue, KPIs, and active project board. Open this every morning."
+
+decision_queue:
+  - label: Approvals waiting
+    db: Deliverables
+    filter: "Needs Client Approval = checked"
+    sort: "Feedback Due Date asc"
+  - label: Overdue invoices
+    db: Finance
+    filter: "Is Overdue = checked"
+    sort: "Date asc"
+  - label: SLA breaches
+    db: Deliverables
+    filter: "SLA Breach = checked"
+    sort: "Feedback Due Date asc"
+  - label: Blocked tasks
+    db: Tasks
+    filter: "Status = Blocked AND Is Template = unchecked"
+    group_by: Project
+    sort: "Deadline asc"
+
+kpis:
+  - icon: "🏗️"
+    label: Active Projects
+    db: Projects
+    filter: "Is Active = checked"
+  - icon: "📋"
+    label: Tasks Open
+    db: Tasks
+    filter: "Is Open = checked"
+  - icon: "💰"
+    label: Revenue MTD
+    db: Finance
+    filter: "Is Revenue MTD = checked"
+    admin_only: true
+  - icon: "⏰"
+    label: SLA Breaches
+    db: Deliverables
+    filter: "SLA Breach = checked"
+
+sections:
+  - heading: Active Projects
+    db: Projects
+    view: Board
+    group_by: Project Stage
+    filter: "Is Active = checked"
+    sort: "Start Date asc"
+
+  - heading: This Week's Tasks
+    db: Tasks
+    view: Board
+    group_by: Ready
+    filter: "Due This Week = checked"
+    sort: "Deadline asc"
+
+  - heading: Lead Follow-ups Due
+    db: Leads
+    view: Table
+    filter: "Needs Follow-up = checked"
+    sort: "Next Action Date asc"
+
+agent_stream: true

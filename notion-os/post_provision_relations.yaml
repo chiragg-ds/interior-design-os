@@ -1,0 +1,138 @@
+# Cross-DB relations — applied in a second pass after all DBs exist.
+# Provisioner reads this, looks up DB IDs from the first-pass output,
+# and PATCHes each property onto the source DB.
+#
+# Format: <source_db>:
+#           <property_name>:
+#             database: <target_db_name>
+#             dual:                # If true, creates two-way relation
+#               property: <name on target side>
+#
+# Set dual: null for single-property relations.
+
+relations:
+  Activities:
+    Client:
+      database: Clients
+      dual: null
+    Lead:
+      database: Leads
+      dual: null
+    Project:
+      database: Projects
+      dual: null
+
+  Meeting Notes:
+    Client:
+      database: Clients
+      dual: null
+    Lead:
+      database: Leads
+      dual: null
+    Project:
+      database: Projects
+      dual: null
+
+  Clients:
+    Contracts:
+      database: Contracts
+      dual:
+        property: Client
+    Active Projects:
+      database: Projects
+      dual:
+        property: Client
+
+  Client Questionnaire Responses:
+    Client:
+      database: Clients
+      dual: null
+
+  Leads:
+    Won Client:
+      database: Clients
+      dual: null
+
+  Projects:
+    Contract:
+      database: Contracts
+      dual:
+        property: Project
+    Team Members:
+      database: Team Members
+      dual:
+        property: Projects
+    Deliverables:
+      database: Deliverables
+      dual:
+        property: Project
+    Handover Items:
+      database: Handover Items
+      dual:
+        property: Project
+    Tasks:
+      database: Tasks
+      dual:
+        property: Project
+    Checklists:
+      database: Relevant Checklist
+      dual:
+        property: Project
+
+  Site Log:
+    Project:
+      database: Projects
+      dual: null
+
+  Materials:
+    Project:
+      database: Projects
+      dual: null
+    Vendor:
+      database: Vendors
+      dual: null
+
+  Tasks:
+    Dependencies:
+      database: Tasks   # self-relation
+      dual: null
+
+  Contracts:
+    Client:
+      database: Clients
+      dual:
+        property: Contracts
+
+  BOQ:
+    Project:
+      database: Projects
+      dual: null
+    Contract:
+      database: Contracts
+      dual: null
+    Vendor:
+      database: Vendors
+      dual: null
+
+  Finance:
+    Project:
+      database: Projects
+      dual: null
+    Contract:
+      database: Contracts
+      dual: null
+
+  Vendors:
+    Projects:
+      database: Projects
+      dual: null
+
+  Contractors:
+    Projects:
+      database: Projects
+      dual: null
+
+  Weekly Status Log:
+    Project:
+      database: Projects
+      dual: null

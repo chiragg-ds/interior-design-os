@@ -1,0 +1,52 @@
+[
+  {"title": "Architectural drawings vs. site reality cross-check", "properties": {"Checklist Section": {"select": "Design Compliance"}, "Item Number": {"number": 1}}},
+  {"title": "Approved BOQ sign-off archived", "properties": {"Checklist Section": {"select": "Design Compliance"}, "Item Number": {"number": 2}}},
+  {"title": "Design iteration log closed at agreed iteration count", "properties": {"Checklist Section": {"select": "Design Compliance"}, "Item Number": {"number": 3}}},
+  {"title": "Material specifications matched to install", "properties": {"Checklist Section": {"select": "Design Compliance"}, "Item Number": {"number": 4}}},
+
+  {"title": "Floor levels checked across all rooms", "properties": {"Checklist Section": {"select": "Civil and Finishes"}, "Item Number": {"number": 5}}},
+  {"title": "Wall plumb + finish quality verified", "properties": {"Checklist Section": {"select": "Civil and Finishes"}, "Item Number": {"number": 6}}},
+  {"title": "Ceiling finishes — no cracks, even paint, level", "properties": {"Checklist Section": {"select": "Civil and Finishes"}, "Item Number": {"number": 7}}},
+  {"title": "Skirting installed without gaps", "properties": {"Checklist Section": {"select": "Civil and Finishes"}, "Item Number": {"number": 8}}},
+  {"title": "Tile grouting clean + level", "properties": {"Checklist Section": {"select": "Civil and Finishes"}, "Item Number": {"number": 9}}},
+  {"title": "Paint touch-ups completed; no patches visible", "properties": {"Checklist Section": {"select": "Civil and Finishes"}, "Item Number": {"number": 10}}},
+  {"title": "Door + window operation smooth, locks functional", "properties": {"Checklist Section": {"select": "Civil and Finishes"}, "Item Number": {"number": 11}}},
+  {"title": "Window grills + safety bars installed", "properties": {"Checklist Section": {"select": "Civil and Finishes"}, "Item Number": {"number": 12}}},
+
+  {"title": "All switches + sockets working — load test passed", "properties": {"Checklist Section": {"select": "Electrical and Automation"}, "Item Number": {"number": 13}}},
+  {"title": "Earthing tested; resistance within spec", "properties": {"Checklist Section": {"select": "Electrical and Automation"}, "Item Number": {"number": 14}}},
+  {"title": "MCB labelling + DB diagram delivered", "properties": {"Checklist Section": {"select": "Electrical and Automation"}, "Item Number": {"number": 15}}},
+  {"title": "Light fixtures aligned, dimmers functional", "properties": {"Checklist Section": {"select": "Electrical and Automation"}, "Item Number": {"number": 16}}},
+  {"title": "Smart home automation paired + tested", "properties": {"Checklist Section": {"select": "Electrical and Automation"}, "Item Number": {"number": 17}}},
+  {"title": "TV/Internet outlets verified live", "properties": {"Checklist Section": {"select": "Electrical and Automation"}, "Item Number": {"number": 18}}},
+  {"title": "AC units installed, condensate drainage tested", "properties": {"Checklist Section": {"select": "Electrical and Automation"}, "Item Number": {"number": 19}}},
+
+  {"title": "All taps + showers checked for flow + leaks", "properties": {"Checklist Section": {"select": "Plumbing and Wet Areas"}, "Item Number": {"number": 20}}},
+  {"title": "Water heater installed + tested at all outlets", "properties": {"Checklist Section": {"select": "Plumbing and Wet Areas"}, "Item Number": {"number": 21}}},
+  {"title": "Wet area waterproofing flood-tested 24h", "properties": {"Checklist Section": {"select": "Plumbing and Wet Areas"}, "Item Number": {"number": 22}}},
+  {"title": "Drain falls verified; no standing water", "properties": {"Checklist Section": {"select": "Plumbing and Wet Areas"}, "Item Number": {"number": 23}}},
+  {"title": "WC flush + bidet operation", "properties": {"Checklist Section": {"select": "Plumbing and Wet Areas"}, "Item Number": {"number": 24}}},
+  {"title": "Sink + counter joints sealed", "properties": {"Checklist Section": {"select": "Plumbing and Wet Areas"}, "Item Number": {"number": 25}}},
+
+  {"title": "All wardrobe shutters align + close flush", "properties": {"Checklist Section": {"select": "Carpentry and Furniture"}, "Item Number": {"number": 26}}},
+  {"title": "Drawer slides smooth; soft-close functional", "properties": {"Checklist Section": {"select": "Carpentry and Furniture"}, "Item Number": {"number": 27}}},
+  {"title": "Kitchen modular hardware installed + adjusted", "properties": {"Checklist Section": {"select": "Carpentry and Furniture"}, "Item Number": {"number": 28}}},
+  {"title": "Kitchen appliances paired + manuals handed over", "properties": {"Checklist Section": {"select": "Carpentry and Furniture"}, "Item Number": {"number": 29}}},
+  {"title": "Furniture pieces delivered + installed", "properties": {"Checklist Section": {"select": "Carpentry and Furniture"}, "Item Number": {"number": 30}}},
+  {"title": "Furniture protective film removed; surface clean", "properties": {"Checklist Section": {"select": "Carpentry and Furniture"}, "Item Number": {"number": 31}}},
+  {"title": "Curtains + soft furnishings hung + draped", "properties": {"Checklist Section": {"select": "Carpentry and Furniture"}, "Item Number": {"number": 32}}},
+
+  {"title": "Fire safety: smoke detectors, extinguisher placement", "properties": {"Checklist Section": {"select": "Safety and Security"}, "Item Number": {"number": 33}}},
+  {"title": "Gas leak test (if applicable)", "properties": {"Checklist Section": {"select": "Safety and Security"}, "Item Number": {"number": 34}}},
+  {"title": "Door locks + main door reinforcement", "properties": {"Checklist Section": {"select": "Safety and Security"}, "Item Number": {"number": 35}}},
+  {"title": "Childproofing items (sockets, sharp edges)", "properties": {"Checklist Section": {"select": "Safety and Security"}, "Item Number": {"number": 36}}},
+  {"title": "CCTV / intercom paired + tested", "properties": {"Checklist Section": {"select": "Safety and Security"}, "Item Number": {"number": 37}}},
+
+  {"title": "As-built drawings handed over (PDF + source)", "properties": {"Checklist Section": {"select": "Documentation and Sign-off"}, "Item Number": {"number": 38}}},
+  {"title": "Warranty cards + manuals binder delivered", "properties": {"Checklist Section": {"select": "Documentation and Sign-off"}, "Item Number": {"number": 39}}},
+  {"title": "Vendor + brand contact list shared", "properties": {"Checklist Section": {"select": "Documentation and Sign-off"}, "Item Number": {"number": 40}}},
+  {"title": "Maintenance schedule shared", "properties": {"Checklist Section": {"select": "Documentation and Sign-off"}, "Item Number": {"number": 41}}},
+  {"title": "Snag list closure documented", "properties": {"Checklist Section": {"select": "Documentation and Sign-off"}, "Item Number": {"number": 42}}},
+  {"title": "Final invoice issued + payment status confirmed", "properties": {"Checklist Section": {"select": "Documentation and Sign-off"}, "Item Number": {"number": 43}}},
+  {"title": "Client sign-off form signed + archived", "properties": {"Checklist Section": {"select": "Documentation and Sign-off"}, "Item Number": {"number": 44}}}
+]

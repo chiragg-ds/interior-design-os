@@ -1,0 +1,46 @@
+# Per-client configuration — copy to client.config.yaml and edit for each new client.
+# Consumed by: provision.py, scripts/generate_walkthrough.py, helper_formulas template render.
+
+client:
+  name: "Acme Designs"                  # Internal full name
+  industry: "interior_design"           # Locked to interior_design for this template
+  country_code: "IN"                    # ISO 3166-1
+  currency_symbol: "₹"
+
+brand:
+  name: "Acme Studio"                   # Brand shown in walkthroughs + cockpit
+  logo_emoji: "🏠"
+  primary_color: "blue"                 # Notion callout color: blue|orange|pink|purple|yellow|green|brown|gray|red
+
+# Financial defaults (Studio Nuvah pattern — adjust per client)
+financials:
+  gst_rate: 18                          # Percent
+  fee_stages: [25, 40, 25, 10]          # Must sum to 100
+  invoice_due_days: 7                   # Triggers Is Overdue formula
+  client_feedback_sla_hours: 96         # Triggers SLA Breach formula (96h = 4 days)
+  max_design_iterations: 3              # Contractual cap
+
+# Work scopes the client offers — used to filter task / checklist auto-seeding
+work_scopes:
+  - "Full Home Interior"
+  - "Modular Kitchen"
+  - "Bathroom Renovation"
+  - "Carpentry & FF&E"
+
+# Office hours (for activity log defaults)
+office_hours:
+  start: "10:00"
+  end: "18:00"
+  days: ["Mon", "Tue", "Wed", "Thu", "Fri"]
+
+# Team — pre-seeded into Team Members DB on provision
+team:
+  - name: "Owner"
+    role: "Principal Designer"
+    permission: "Admin"
+    email: ""
+  # Add more rows as you onboard
+
+# Workspace root — set after creating the parent page in Notion
+notion:
+  root_page_id: "REPLACE_WITH_ROOT_PAGE_ID"

@@ -1,0 +1,33 @@
+name: Tasks Autoseed
+
+# Replaces the local LaunchAgent. Runs every hour to find projects with
+# Tasks Status = Not Seeded AND Work Scope set, seeds scope-filtered tasks,
+# rewires Dependencies via Template Group lookup, flips Tasks Status = Seeded.
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # Every hour on the hour
+  workflow_dispatch:       # Allow manual trigger from Actions tab
+
+permissions:
+  contents: read
+
+jobs:
+  autoseed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          pip install pyyaml
+          pip install -e ./external/notion-os-toolkit 2>/dev/null || true
+
+      - name: Run autoseed
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+        run: |
+          python3 notion-os/autoseed_runner.py

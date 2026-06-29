@@ -1,0 +1,43 @@
+[
+  {"title": "Site Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "General Layout"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Existing Floor Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "General Layout"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Proposed Floor Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "General Layout"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Furniture Layout Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "General Layout"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Demolition Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Civil"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": false}}},
+  {"title": "Civil Construction Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Civil"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": false}}},
+
+  {"title": "Electrical Layout Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Electrical"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Switch + Socket Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Electrical"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Lighting Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Electrical"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "DB Distribution Schedule", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Electrical"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": false}}},
+
+  {"title": "Plumbing Layout Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Plumbing and Sanitary"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Sanitary Schedule", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Plumbing and Sanitary"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+
+  {"title": "Floor Tiling Pattern", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Flooring and Tiling"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Wall Tiling Pattern", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Flooring and Tiling"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+
+  {"title": "Modular Kitchen Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Kitchen"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Kitchen Elevations", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Kitchen"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Kitchen 3D Renders", "properties": {"Deliverable Type": {"select": "Render"}, "Drawing Category": {"select": "Kitchen"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+
+  {"title": "False Ceiling Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "False Ceiling"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "False Ceiling Details", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "False Ceiling"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": false}}},
+
+  {"title": "Wardrobe Layouts", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Furniture and Wardrobe"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Wardrobe Sections", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Furniture and Wardrobe"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": false}}},
+
+  {"title": "Custom Furniture Drawings", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Custom Furniture"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+
+  {"title": "Bathroom Layouts", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Bathroom"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+  {"title": "Bathroom 3D Renders", "properties": {"Deliverable Type": {"select": "Render"}, "Drawing Category": {"select": "Bathroom"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+
+  {"title": "Door + Window Schedule", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Doors and Windows"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+
+  {"title": "Paint + Finish Schedule", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Paint and Finish"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": true}}},
+
+  {"title": "HVAC Layout Plan", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "HVAC and Automation"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": false}}},
+  {"title": "Home Automation Schedule", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "HVAC and Automation"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": false}}},
+
+  {"title": "Coordination Drawing — Civil + MEP", "properties": {"Deliverable Type": {"select": "Drawing"}, "Drawing Category": {"select": "Coordination"}, "Version": {"rich_text": "R0"}, "Requires Client Approval": {"checkbox": false}}}
+]

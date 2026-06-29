@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Sensitive — per-client values
+.env
+.env.*
+!.env.example
+.keys/
+client.config.yaml
+!client.config.example.yaml
+
+# Generated outputs (per workspace, not template)
+notion-os/ids.json
+notion-os/SCHEMA-REFERENCE.md
+notion-os/schema-reference.json
+docs/WALKTHROUGH.md
+
+# Submodule build artifacts
+external/notion-os-toolkit/*.egg-info/
+external/notion-os-toolkit/build/
+external/notion-os-toolkit/dist/
+
+.DS_Store
