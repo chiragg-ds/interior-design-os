@@ -23,7 +23,6 @@ formulas:
     Done Flag: 'if(prop("Status") == "Done", 1, 0)'
     Is Open: 'prop("Is Template") == false and prop("Status") != "Done"'
     Due This Week: 'prop("Is Template") == false and prop("Status") != "Done" and not empty(prop("Deadline")) and dateBetween(prop("Deadline"), now(), "days") >= 0 and dateBetween(prop("Deadline"), now(), "days") <= 7'
-    Ready: 'if(prop("Dep Total") == 0 or prop("Dep Done") == prop("Dep Total"), "✅ Ready", "🔒 Blocked — " + format(prop("Dep Done")) + "/" + format(prop("Dep Total")))'
 
   Relevant Checklist:
     Status Flag: 'if(prop("Status") == "Done", 1, 0)'
@@ -47,7 +46,13 @@ rollups:
     Dep Done:  {via: Dependencies, target: Done Flag,   function: sum}
     Dep Total: {via: Dependencies, target: Task Action, function: count_values}
 
-# Project completion % depends on Checklist rollups → added LAST
+# Formulas that reference rollups — added LAST after rollups exist.
+# Notion batch PATCHes a DB atomically; if any formula references a property
+# that doesn't yet exist, the whole batch fails. Keep rollup-dependent formulas
+# in this phase so they land after rollups are created.
 post_rollup_formulas:
   Projects:
     Completion %: 'if(prop("Checklist Total") == 0, 0, round(prop("Checklist Done") / prop("Checklist Total") * 100))'
+
+  Tasks:
+    Ready: 'if(prop("Dep Total") == 0 or prop("Dep Done") == prop("Dep Total"), "✅ Ready", "🔒 Blocked — " + format(prop("Dep Done")) + "/" + format(prop("Dep Total")))'
