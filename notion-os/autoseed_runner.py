@@ -6,14 +6,9 @@ local LaunchAgent used to run.
 """
 
 import json
-import sys
 from pathlib import Path
 
-try:
-    from notion_os_toolkit import auth, client as notion_client, seeder
-except ImportError:
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "notion-os-toolkit"))
-    from src import auth, client as notion_client, seeder  # type: ignore
+from notion_os_toolkit import auth, client as notion_client, seeder
 
 ROOT = Path(__file__).resolve().parent
 IDS = ROOT / "ids.json"

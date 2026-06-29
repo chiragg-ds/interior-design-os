@@ -15,15 +15,9 @@ Re-runnable. Idempotent. Existing pages and DBs are reused; missing properties a
 
 import json
 import os
-import sys
 from pathlib import Path
 
-# Allow either pip-installed notion_os_toolkit or path-injected sibling repo
-try:
-    from notion_os_toolkit import auth, client as notion_client, provisioner
-except ImportError:
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "notion-os-toolkit"))
-    from src import auth, client as notion_client, provisioner  # type: ignore
+from notion_os_toolkit import auth, client as notion_client, provisioner
 
 import yaml
 

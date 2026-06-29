@@ -9,14 +9,9 @@ and skips if so. Pass --force to re-seed.
 
 import argparse
 import json
-import sys
 from pathlib import Path
 
-try:
-    from notion_os_toolkit import auth, client as notion_client, seeder
-except ImportError:
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "notion-os-toolkit"))
-    from src import auth, client as notion_client, seeder  # type: ignore
+from notion_os_toolkit import auth, client as notion_client, seeder
 
 ROOT = Path(__file__).resolve().parent
 SEEDS = ROOT / "seeds"
